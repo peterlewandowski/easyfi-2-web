@@ -1,36 +1,35 @@
-import { createBrowserRouter, Routes, Route  } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Layout } from "antd";
-import "./App.css";
 
 import { UserContextProvider } from "./context/UserContext";
+import { AnonRoute } from "./components/common/AnonRoute";
+import { AuthRoute } from "./components/common/AuthRoute";
+
+import "./App.css";
+import Home from "./pages/Home";
 
 const { Header, Content, Footer } = Layout;
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home />,
-  },
-  {
-    path: "/create-strategy",
-    element: <CreateStrategy />,
-  },
-  {path:'/login', element: {<AnonRoute>}}
-]);
-
 function App() {
   return (
-    <Layout>
-      <Header>Header</Header>
-      <Content>
-        <Routes>
-
+      <Layout>
+        <Header>Header</Header>
+        <Content>
+          <Routes>
             <Route path="/" element={<Home />} />
-
-        </Routes>
-      </Content>
-      <Footer>Footer</Footer>
-    </Layout>
+            {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
+            <Route
+              path="/login"
+              element={<AnonRoute>{/* <LoginPage /> */}</AnonRoute>}
+            />
+            <Route
+              path="/dashboard"
+              element={<AuthRoute>{/* <Dashboard /> */}</AuthRoute>}
+            />
+          </Routes>
+        </Content>
+        <Footer>Footer</Footer>
+      </Layout>
   );
 }
 
