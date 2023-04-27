@@ -7,14 +7,14 @@ interface UserContextType {
 }
 
 interface UserContextProviderProps {
-  children: ReactNode;
+  children: ReactNode | ReactNode[] | null;
 }
-export const UserContext = createContext<UserContextType | undefined>(
-  undefined
+export const UserContext = createContext<UserContextType>(
+  {} as UserContextType
 );
 
-export const UserContextProvider: React.FC<UserContextProviderProps> = (
-  props
+export const UserContextProvider = (
+  props:  UserContextProviderProps
 ) => {
   const auth = getAuth();
   const [user, setUser] = useState<User | null | undefined>();
