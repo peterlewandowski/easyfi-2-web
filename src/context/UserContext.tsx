@@ -1,5 +1,7 @@
 import { createContext, useEffect, useState, ReactNode } from "react";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { firebaseConfig } from "../services/firebaseConfig";
 
 interface UserContextType {
   user: User | null | undefined;
@@ -9,13 +11,14 @@ interface UserContextType {
 interface UserContextProviderProps {
   children: ReactNode | ReactNode[] | null;
 }
+
+initializeApp(firebaseConfig);
+
 export const UserContext = createContext<UserContextType>(
   {} as UserContextType
 );
 
-export const UserContextProvider = (
-  props:  UserContextProviderProps
-) => {
+export const UserContextProvider = (props: UserContextProviderProps) => {
   const auth = getAuth();
   const [user, setUser] = useState<User | null | undefined>();
   const [loaded, setLoaded] = useState(false);
