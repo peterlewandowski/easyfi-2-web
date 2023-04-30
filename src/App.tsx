@@ -12,6 +12,7 @@ const { Header, Content, Footer } = Layout;
 
 function App() {
   return (
+    <UserContextProvider>
       <Layout>
         <Header>Header</Header>
         <Content>
@@ -30,6 +31,7 @@ function App() {
         </Content>
         <Footer>Footer</Footer>
       </Layout>
+    </UserContextProvider>
   );
 }
 
