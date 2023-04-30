@@ -8,14 +8,37 @@ import { AuthRoute } from "./components/common/AuthRoute";
 import "./App.css";
 import Home from "./pages/Home";
 
+import FooterContent from "./components/common/Footer";
+import Navbar from "./components/common/Navbar";
+
 const { Header, Content, Footer } = Layout;
+
+const styles = {
+  header: {
+    width: "100%",
+    padding: "0 12px",
+  },
+
+  content: {
+    padding: "0 50px",
+    marginTop: 64,
+  },
+
+  footer: {
+    width: "100%",
+    color: "#001529",
+    padding: "0 12px",
+  },
+};
 
 function App() {
   return (
     <UserContextProvider>
       <Layout>
-        <Header>Header</Header>
-        <Content>
+        <Header style={styles.header}>
+          <Navbar />
+        </Header>
+        <Content style={styles.content}>
           <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
@@ -29,7 +52,9 @@ function App() {
             />
           </Routes>
         </Content>
-        <Footer>Footer</Footer>
+        <Footer style={styles.footer}>
+          <FooterContent />
+        </Footer>
       </Layout>
     </UserContextProvider>
   );
