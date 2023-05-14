@@ -18,7 +18,7 @@ export const UserContext = createContext<UserContextType>(
   {} as UserContextType
 );
 
-export const UserContextProvider = (props: UserContextProviderProps) => {
+export const UserContextProvider = ({children}: UserContextProviderProps) => {
   const auth = getAuth();
   const [user, setUser] = useState<User | null | undefined>();
   const [loaded, setLoaded] = useState(false);
@@ -35,5 +35,5 @@ export const UserContextProvider = (props: UserContextProviderProps) => {
     return <></>;
   }
 
-  return <Provider value={value}>{props.children}</Provider>;
+  return <Provider value={value}>{children}</Provider>;
 };
