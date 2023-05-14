@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 
 import FooterContent from "./components/common/Footer";
 import Navbar from "./components/common/Navbar";
+import { InputContextProvider, StrategiesContextProvider } from "./context";
 
 const { Header, Content, Footer } = Layout;
 
@@ -34,28 +35,32 @@ const styles = {
 function App() {
   return (
     <UserContextProvider>
-      <Layout>
-        <Header style={styles.header}>
-          <Navbar />
-        </Header>
-        <Content style={styles.content}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
-            <Route
-              path="/login"
-              element={<AnonRoute>{/* <LoginPage /> */}</AnonRoute>}
-            />
-            <Route
-              path="/dashboard"
-              element={<AuthRoute>{/* <Dashboard /> */}</AuthRoute>}
-            />
-          </Routes>
-        </Content>
-        <Footer style={styles.footer}>
-          <FooterContent />
-        </Footer>
-      </Layout>
+      <InputContextProvider>
+        <StrategiesContextProvider>
+          <Layout>
+            <Header style={styles.header}>
+              <Navbar />
+            </Header>
+            <Content style={styles.content}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
+                <Route
+                  path="/login"
+                  element={<AnonRoute>{/* <LoginPage /> */}</AnonRoute>}
+                />
+                <Route
+                  path="/dashboard"
+                  element={<AuthRoute>{/* <Dashboard /> */}</AuthRoute>}
+                />
+              </Routes>
+            </Content>
+            <Footer style={styles.footer}>
+              <FooterContent />
+            </Footer>
+          </Layout>
+        </StrategiesContextProvider>
+      </InputContextProvider>
     </UserContextProvider>
   );
 }
