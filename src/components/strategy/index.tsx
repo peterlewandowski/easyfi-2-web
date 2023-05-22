@@ -1,5 +1,4 @@
 export {default as CreateStrategy} from './CreateStrategy';
-export {default as StrategiesList} from './StrategiesList';
 export {default as EditStrategyCard} from './EditStrategyCard'
 export {default as YourStrategyModal} from './YourStrategyModal';
 
