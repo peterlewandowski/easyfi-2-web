@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Cascader } from "antd";
+import { InputContext, StrategiesContext } from "../../context";
 
-export default function Step4({
-  userInput,
-  setUserInput,
-  amounts,
-  setAmounts,
-  currentStrategy,
-}) {
+export default function Step4() {
+  const { userInput, setUserInput, setAmounts } = useContext(InputContext);
+  const { currentStrategy } = useContext(StrategiesContext);
+
   useEffect(() => {
     if (currentStrategy) {
       setAmounts(currentStrategy.strategy.asset);
     }
-  }, [currentStrategy]);
+  }, [currentStrategy, setAmounts]);
 
   const options = [
     { value: 10, label: "$10" },
@@ -25,8 +23,8 @@ export default function Step4({
 
   return (
     <Cascader
-      placeholder={currentStrategy.strategy.amount || "How much?"}
-      defaultValue={currentStrategy.strategy.amount || userInput.amount}
+      placeholder={currentStrategy?.strategy.amount || "How much?"}
+      defaultValue={currentStrategy?.strategy.amount || userInput.amount}
       options={options}
       onChange={(value) => setUserInput({ ...userInput, amount: value })}
     />

@@ -3,6 +3,11 @@ import { InputContext, StrategiesContext } from "../../context";
 import { useContext } from "react";
 import { SingleValueType } from "rc-cascader/lib/Cascader";
 
+type Asset = {
+  value: string;
+  label: string;
+};
+
 const stocks = [
   { value: "AAPL", label: "Apple Inc." },
   { value: "AMZN", label: "Amazon.com, Inc." },
@@ -46,7 +51,7 @@ export default function Step2() {
     setUserInput({
       ...userInput,
       asset: value,
-      description: assets.find((asset) => asset.value === value[0]).label,
+      description: assets.find((asset: Asset) => asset.value === value[0]).label,
     });
   };
 
@@ -62,8 +67,8 @@ export default function Step2() {
 
   return (
     <Cascader
-      placeholder={currentStrategy.strategy.asset || "Take your pick"}
-      defaultValue={currentStrategy.strategy.asset || userInput.asset}
+      placeholder={currentStrategy?.strategy.asset || "Take your pick"}
+      defaultValue={currentStrategy?.strategy.asset || userInput.asset}
       options={assets}
       onChange={handleChange}
     />

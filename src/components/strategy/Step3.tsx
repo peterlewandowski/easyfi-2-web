@@ -1,18 +1,16 @@
-import React, { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Cascader } from "antd";
+import { InputContext, StrategiesContext } from "../../context";
 
-export default function Step2({
-  userInput,
-  setUserInput,
-  frequencies,
-  setFrequencies,
-  currentStrategy,
-}) {
+export default function Step2() {
+  const { userInput, setUserInput, setFrequencies } = useContext(InputContext);
+  const { currentStrategy } = useContext(StrategiesContext);
+
   useEffect(() => {
     if (currentStrategy) {
       setFrequencies(currentStrategy.strategy.frequency);
     }
-  }, [currentStrategy]);
+  }, [currentStrategy, setFrequencies]);
 
   const options = [
     { value: "Daily", label: "Daily" },
@@ -22,8 +20,8 @@ export default function Step2({
 
   return (
     <Cascader
-      placeholder={currentStrategy.strategy.frequency || "How often?"}
-      defaultValue={currentStrategy.strategy.frequency || userInput.frequency}
+      placeholder={currentStrategy?.strategy.frequency || "How often?"}
+      defaultValue={currentStrategy?.strategy.frequency || userInput.frequency}
       options={options}
       onChange={(value) => setUserInput({ ...userInput, frequency: value })}
     />
