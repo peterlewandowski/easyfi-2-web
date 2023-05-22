@@ -1,10 +1,24 @@
-import { createContext, useState, ReactNode } from "react";
+import { createContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
+
+export interface Strategy {
+  asset: string;
+  amount: number;
+  frequency: string;
+  type: string;
+  description: string;
+}
+
+export interface UserStrategy {
+  id: string;
+  strategy: Strategy;
+  created_at: { _seconds: number };
+}
 
 interface StrategiesContextType {
-  userStrategies: any;
-  setUserStrategies: any;
-  currentStrategy: any;
-  setCurrentStrategy: any;
+  userStrategies: UserStrategy[] | undefined;
+  setUserStrategies: Dispatch<SetStateAction<UserStrategy[] | undefined>>;
+  currentStrategy: UserStrategy | undefined | null;
+  setCurrentStrategy: Dispatch<SetStateAction<UserStrategy | undefined | null>>;
 }
 
 interface StrategiesContextProviderProps {
@@ -19,8 +33,8 @@ export const StrategiesContextProvider = ({
   children,
 }: StrategiesContextProviderProps) => {
   const { Provider } = StrategiesContext;
-  const [userStrategies, setUserStrategies] = useState();
-  const [currentStrategy, setCurrentStrategy] = useState();
+  const [userStrategies, setUserStrategies] = useState<UserStrategy[] | undefined>();
+  const [currentStrategy, setCurrentStrategy] = useState<UserStrategy | undefined | null>();
 
   const value = {
     userStrategies,
