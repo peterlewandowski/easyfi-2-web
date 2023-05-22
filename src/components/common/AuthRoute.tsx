@@ -9,5 +9,5 @@ interface AuthRouteProps {
 export const AuthRoute = ({ children }: AuthRouteProps) => {
   const { user } = useContext(UserContext);
 
-  return <>{!user ? children : <Navigate to="/login" replace />}</>;
+  return <>{user ? children : <Navigate to="/login" replace />}</>;
 };

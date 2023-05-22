@@ -1,13 +1,10 @@
-import React from "react";
-// import CreateStrategy from "../CreateStrategy";
+import { Card } from "antd";
+import CreateStrategy from "../strategy/CreateStrategy";
 
 export default function Main() {
   return (
-    <div id="main" style={{ backgroundColor: "#F0FBF0" }}>
-      {/* <CreateStrategy /> */}
-      <div>
-        Main: create Strategy
-      </div>
-    </div>
+    <Card id="main" style={{ backgroundColor: "#F0FBF0" }}>
+      <CreateStrategy />
+    </Card>
   );
 }

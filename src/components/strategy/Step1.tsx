@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Radio, RadioChangeEvent } from "antd";
+import { Radio, RadioChangeEvent, Space, Typography } from "antd";
 import { InputContext, StrategiesContext } from "../../context";
 
 export default function Step1() {
@@ -19,12 +19,16 @@ export default function Step1() {
 
   return (
     <>
-      <h3>I would like to invest in:</h3>
-      <Radio.Group onChange={handleChange} value={types} size="large">
-        <Radio value={"Stock"}>Stock</Radio>
-        <Radio value={"ETF"}>ETF</Radio>
-        <Radio value={"Crypto"}>Crypto</Radio>
-      </Radio.Group>
+      <Space direction="vertical">
+        <Typography.Title level={5}>
+          I would like to invest in:
+        </Typography.Title>
+        <Radio.Group onChange={handleChange} value={types} size="large">
+          <Radio value={"Stock"}>Stock</Radio>
+          <Radio value={"ETF"}>ETF</Radio>
+          <Radio value={"Crypto"}>Crypto</Radio>
+        </Radio.Group>
+      </Space>
     </>
   );
 }

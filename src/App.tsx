@@ -11,24 +11,27 @@ import Home from "./pages/Home";
 import FooterContent from "./components/common/Footer";
 import Navbar from "./components/common/Navbar";
 import { InputContextProvider, StrategiesContextProvider } from "./context";
+import Dashboard from "./pages/Dashboard";
+import { LoginPage } from "./pages/LoginPage";
 
 const { Header, Content, Footer } = Layout;
 
 const styles = {
   header: {
     width: "100%",
-    padding: "0 12px",
+    // padding: "0",
   },
 
   content: {
-    padding: "0 50px",
+    width: "100%",
+    // padding: "0",
     marginTop: 64,
   },
 
   footer: {
     width: "100%",
     color: "#001529",
-    padding: "0 12px",
+    padding: "0",
   },
 };
 
@@ -47,11 +50,19 @@ function App() {
                 {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
                 <Route
                   path="/login"
-                  element={<AnonRoute>{/* <LoginPage /> */}</AnonRoute>}
+                  element={
+                    <AnonRoute>
+                      <LoginPage />
+                    </AnonRoute>
+                  }
                 />
                 <Route
                   path="/dashboard"
-                  element={<AuthRoute>{/* <Dashboard /> */}</AuthRoute>}
+                  element={
+                    <AuthRoute>
+                      <Dashboard />
+                    </AuthRoute>
+                  }
                 />
               </Routes>
             </Content>

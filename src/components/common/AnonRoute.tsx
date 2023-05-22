@@ -9,5 +9,5 @@ interface AnonRouteProps {
 export function AnonRoute({ children }: AnonRouteProps) {
   const { user } = useContext(UserContext);
 
-  return <>{!user ? <Navigate to="/dashboard" replace /> : children};</>;
+  return <>{user ? <Navigate to="/dashboard" replace /> : children}</>;
 }
