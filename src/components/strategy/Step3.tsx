@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Cascader } from "antd";
+import { Cascader, Space, Typography } from "antd";
 import { InputContext, StrategiesContext } from "../../context";
 
 export default function Step2() {
@@ -19,11 +19,16 @@ export default function Step2() {
   ];
 
   return (
-    <Cascader
-      placeholder={currentStrategy?.strategy.frequency || "How often?"}
-      defaultValue={currentStrategy?.strategy.frequency || userInput.frequency}
-      options={options}
-      onChange={(value) => setUserInput({ ...userInput, frequency: value })}
-    />
+    <Space direction="vertical">
+      <Typography.Title level={5}>How often:</Typography.Title>
+      <Cascader
+        placeholder={currentStrategy?.strategy.frequency || "Pick frequency"}
+        defaultValue={
+          currentStrategy?.strategy.frequency || userInput.frequency
+        }
+        options={options}
+        onChange={(value) => setUserInput({ ...userInput, frequency: value })}
+      />
+    </Space>
   );
 }

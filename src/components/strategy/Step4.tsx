@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react";
-import { Cascader } from "antd";
+import { Cascader, Space, Typography } from "antd";
 import { InputContext, StrategiesContext } from "../../context";
 
 export default function Step4() {
@@ -22,11 +22,14 @@ export default function Step4() {
   ];
 
   return (
-    <Cascader
-      placeholder={currentStrategy?.strategy.amount || "How much?"}
-      defaultValue={currentStrategy?.strategy.amount || userInput.amount}
-      options={options}
-      onChange={(value) => setUserInput({ ...userInput, amount: value })}
-    />
+    <Space direction="vertical">
+      <Typography.Title level={5}>How much:</Typography.Title>
+      <Cascader
+        placeholder={currentStrategy?.strategy.amount || "Pick amount"}
+        defaultValue={currentStrategy?.strategy.amount || userInput.amount}
+        options={options}
+        onChange={(value) => setUserInput({ ...userInput, amount: value })}
+      />
+    </Space>
   );
 }

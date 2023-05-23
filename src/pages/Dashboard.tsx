@@ -1,4 +1,4 @@
-import { Button } from "antd";
+import { Button, Col, Row, Space } from "antd";
 import { useNavigate } from "react-router-dom";
 
 import StrategiesList from "../components/dashboard/StrategiesList";
@@ -12,20 +12,18 @@ export default function Dashboard() {
 
   return (
     <>
-      <nav
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-      >
-        <Button type="primary" onClick={handleClick}>
-          Add New
-        </Button>
-      </nav>
-      <div id="main" style={{ backgroundColor: "#F0FBF0" }}>
-        <StrategiesList />
-      </div>
+      <Space direction="vertical">
+        <Row justify="center">
+          <Button type="primary" onClick={handleClick}>
+            Add New Strategy
+          </Button>
+        </Row>
+        <Row justify="center" style={{ backgroundColor: "#F0FBF0" }}>
+          <Col xs={22} sm={22} md={20} lg={18}>
+            <StrategiesList />
+          </Col>
+        </Row>
+      </Space>
     </>
   );
 }

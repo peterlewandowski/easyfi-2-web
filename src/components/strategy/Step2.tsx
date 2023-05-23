@@ -1,4 +1,4 @@
-import { Cascader } from "antd";
+import { Cascader, Space, Typography } from "antd";
 import { InputContext, StrategiesContext } from "../../context";
 import { useContext } from "react";
 import { SingleValueType } from "rc-cascader/lib/Cascader";
@@ -44,14 +44,16 @@ const cryptos = [
 ];
 
 export default function Step2() {
-  const { userInput, setUserInput, types, assets, setAssets } = useContext(InputContext);
+  const { userInput, setUserInput, types, assets, setAssets } =
+    useContext(InputContext);
   const { currentStrategy } = useContext(StrategiesContext);
 
   const handleChange = (value: SingleValueType) => {
     setUserInput({
       ...userInput,
       asset: value,
-      description: assets.find((asset: Asset) => asset.value === value[0]).label,
+      description: assets.find((asset: Asset) => asset.value === value[0])
+        .label,
     });
   };
 
@@ -66,11 +68,14 @@ export default function Step2() {
   }
 
   return (
-    <Cascader
-      placeholder={currentStrategy?.strategy.asset || "Take your pick"}
-      defaultValue={currentStrategy?.strategy.asset || userInput.asset}
-      options={assets}
-      onChange={handleChange}
-    />
+    <Space direction="vertical">
+      <Typography.Title level={5}>Which {types}:</Typography.Title>
+      <Cascader
+        placeholder={currentStrategy?.strategy.asset || "Take your pick"}
+        defaultValue={currentStrategy?.strategy.asset || userInput.asset}
+        options={assets}
+        onChange={handleChange}
+      />
+    </Space>
   );
 }
