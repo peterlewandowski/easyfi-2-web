@@ -15,7 +15,8 @@ export default function Navbar() {
   };
 
   const handleLogout = () => {
-    signOut(auth).then(() => navigate("/"));
+    signOut(auth);
+    navigate("/");
   };
 
   const navButtons = user ? (
@@ -32,17 +33,15 @@ export default function Navbar() {
   );
 
   return (
-    <Row justify="space-between">
-      <Col>
-        <Row>
-          <img
-            style={{ width: "30%", height: "auto" }}
-            src={LogoImage}
-            onClick={() => navigate("/")}
-            alt="easyFi: Investment Planning. Made Easy."
-          />
-        </Row>
-      </Col>
+    <Row justify="space-between" align="middle">
+      <Row align="middle">
+        <img
+          style={{ width: "30%", height: "auto" }}
+          src={LogoImage}
+          onClick={() => navigate("/")}
+          alt="easyFi: Investment Planning. Made Easy."
+        />
+      </Row>
       <Space>{navButtons}</Space>
     </Row>
   );
