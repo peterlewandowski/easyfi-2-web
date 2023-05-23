@@ -25,20 +25,22 @@ export default function StrategiesList() {
       Object.keys(userInput).length > 0 &&
       userInput.amount.length
     ) {
-      userInput.userId = user?.uid;
+      const updatedUserInput = { ...userInput, userId: user?.uid };
       fetch(`${import.meta.env.VITE_API_URL}/strategies`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(userInput),
+        body: JSON.stringify(updatedUserInput),
       })
         .then(() => {
           const uid = user?.uid;
           fetch(`${import.meta.env.VITE_API_URL}/strategies/${uid}`)
             .then((response) => response.json())
             .then((data: UserStrategy[]) => {
-              data = data.sort((a, b) => b.created_at._seconds - a.created_at._seconds);
+              data = data.sort(
+                (a, b) => b.created_at._seconds - a.created_at._seconds
+              );
               setUserStrategies(data);
               setUserInput(null);
             });
@@ -50,21 +52,21 @@ export default function StrategiesList() {
         fetch(`${import.meta.env.VITE_API_URL}/strategies/${uid}`)
           .then((response) => response.json())
           .then((data: UserStrategy[]) => {
-            console.log({data});
-            data = data.sort((a, b) => b.created_at._seconds - a.created_at._seconds);
+            console.log({ data });
+            data = data.sort(
+              (a, b) => b.created_at._seconds - a.created_at._seconds
+            );
             setUserStrategies(data);
-            // console.log(userStrategies);
           })
           .catch(alert);
       }
     }
-  }, [userInput, user]);
+  }, [userInput, user?.uid, setUserInput, setUserStrategies]);
 
   const showModal = (userStrategy: UserStrategy) => {
     setCurrentStrategy(userStrategy);
     setIsModalVisible(true);
   };
-  // console.log(currentStrategy)
 
   const handleOk = () => {
     setIsModalVisible(false);
@@ -114,9 +116,7 @@ export default function StrategiesList() {
         onCancel={handleCancel}
         onOk={handleOk}
       >
-        {currentStrategy && (
-          <EditStrategyCard />
-        )}
+        {currentStrategy && <EditStrategyCard />}
       </Modal>
     </>
   );

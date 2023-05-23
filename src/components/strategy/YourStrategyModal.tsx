@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { Modal, Button, Card } from "antd";
+import { useContext } from "react";
+import { Modal, Card } from "antd";
 import { useNavigate } from "react-router-dom";
+import { InputContext, StrategiesContext } from "../../context";
 
-export default function YourStrategyModal({ userInput, currentStrategy }) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+type YourStrategyModalProps = {
+  visible: boolean;
+  setIsModalVisible: (visible: boolean) => void;
+};
+
+export default function YourStrategyModal({
+  visible,
+  setIsModalVisible,
+}: YourStrategyModalProps) {
+  const { userInput } = useContext(InputContext);
+  const { currentStrategy } = useContext(StrategiesContext);
   const navigate = useNavigate();
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
 
   const handleCancel = () => {
     setIsModalVisible(false);
@@ -21,25 +27,28 @@ export default function YourStrategyModal({ userInput, currentStrategy }) {
 
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Create Strategy
-      </Button>
       <Modal
         title="Your strategy:"
-        visible={isModalVisible}
+        open={visible}
         onOk={handleOk}
         okText="Save Strategy"
         onCancel={handleCancel}
         cancelText="Edit"
       >
         <Card
-          title={currentStrategy.strategy.asset || userInput.asset}
+          title={currentStrategy?.strategy.asset || userInput?.asset}
           style={{ width: "100%" }}
         >
-          <p>Amount: ${currentStrategy.strategy.amount || userInput.amount}</p>
-          <p>Frequency: {currentStrategy.strategy.frequency || userInput.frequency}</p>
-          <p>Type: {currentStrategy.strategy.frequency || userInput.type}</p>
-          <p>Description: {currentStrategy.strategy.frequency || userInput.description}</p>
+          <p>Amount: ${currentStrategy?.strategy.amount || userInput?.amount}</p>
+          <p>
+            Frequency:{" "}
+            {currentStrategy?.strategy.frequency || userInput?.frequency}
+          </p>
+          <p>Type: {currentStrategy?.strategy.frequency || userInput?.type}</p>
+          <p>
+            Description:{" "}
+            {currentStrategy?.strategy.frequency || userInput?.description}
+          </p>
         </Card>
       </Modal>
     </>
