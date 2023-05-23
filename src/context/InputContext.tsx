@@ -49,15 +49,15 @@ export const InputContextProvider = ({
     setDescriptions,
   };
 
-  useEffect(() => {
-    setUserInput({
-      type: types,
-      asset: assets,
-      frequency: frequencies,
-      amount: amounts,
-      description: descriptions,
-    });
-  }, []);
+  // useEffect(() => {
+  //   setUserInput({
+  //     type: types,
+  //     asset: assets,
+  //     frequency: frequencies,
+  //     amount: amounts,
+  //     description: descriptions,
+  //   });
+  // }, []);
 
   return <Provider value={value}>{children}</Provider>;
 };
