@@ -1,17 +1,34 @@
-import { Card } from "antd";
-import CreateStrategy from "../components/CreateStrategy";
+import { Card, Col, Space } from "antd";
+import { CreateStrategy } from ".";
+import { useContext } from "react";
+import { StrategiesContext } from "../../context";
 
-export default function EditStrategyCard({ currentStrategy }) {
+export default function EditStrategyCard() {
+  const { currentStrategy } = useContext(StrategiesContext);
+
+  if (!currentStrategy) {
+    return null;
+  }
+
+  const {
+    strategy: { asset, amount, frequency, type, description },
+    created_at: { _seconds },
+  } = currentStrategy;
+
   return (
     <>
-      <Card title={currentStrategy.strategy.asset} style={{ width: "100%" }}>
-          <p>Amount: ${currentStrategy.strategy.amount}</p>
-          <p>Frequency: {currentStrategy.strategy.frequency}</p>
-          <p>Type: {currentStrategy.strategy.type}</p>
-          <p>Description: {currentStrategy.strategy.description}</p>
-          <p>Created: {(new Date(currentStrategy.createdAt._seconds * 1000)).toLocaleDateString()}</p>
+      <Space direction="vertical" size={12} style={{ width: "100%" }}>
+        <Card title={asset} style={{ width: "100%" }}>
+          <p>Amount: ${amount}</p>
+          <p>Frequency: {frequency}</p>
+          <p>Type: {type}</p>
+          <p>Description: {description}</p>
+          <p>Created: {new Date(_seconds * 1000).toLocaleDateString()}</p>
         </Card>
-        <CreateStrategy currentStrategy={currentStrategy} />
+        {/* <Col>
+          <CreateStrategy direction="vertical"/>
+        </Col> */}
+      </Space>
     </>
   );
 }
