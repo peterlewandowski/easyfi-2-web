@@ -13,6 +13,7 @@ import Navbar from "./components/common/Navbar";
 import { InputContextProvider, StrategiesContextProvider } from "./context";
 import Dashboard from "./pages/Dashboard";
 import { LoginPage } from "./pages/LoginPage";
+import Main from "./components/home/Main";
 
 const { Header, Content, Footer } = Layout;
 
@@ -47,7 +48,7 @@ function App() {
             <Content style={styles.content}>
               <Routes>
                 <Route path="/" element={<Home />} />
-                {/* <Route path="create-strategy" element={<CreateStrategy />} /> */}
+                <Route path="/create" element={<Main />} />
                 <Route
                   path="/login"
                   element={
